@@ -1,0 +1,57 @@
+{
+  "name": "ai-sales-automation",
+  "version": "1.0.0",
+  "description": "AI-powered lead outreach, follow-up, and intelligent response system",
+  "main": "src/server.js",
+  "scripts": {
+    "ui": "next dev --port 3001",
+    "build": "next build",
+    "start:ui": "next start --port 3001",
+    "outreach": "node src/workflows/outreach.js",
+    "email-outreach": "node src/workflows/emailOutreach.js",
+    "followup": "node src/workflows/followup.js",
+    "bulk-classify": "node src/workflows/bulkClassify.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@clerk/nextjs": "^7.0.7",
+    "@google-cloud/local-auth": "^3.0.1",
+    "@radix-ui/react-avatar": "^1.1.0",
+    "@radix-ui/react-progress": "^1.1.0",
+    "@radix-ui/react-scroll-area": "^1.1.0",
+    "@radix-ui/react-separator": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.0",
+    "@sendgrid/mail": "^8.1.4",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "googleapis": "^144.0.0",
+    "helmet": "^8.0.0",
+    "langfuse": "^3.38.6",
+    "lucide-react": "^0.400.0",
+    "motion": "^12.38.0",
+    "next": "^14.2.5",
+    "node-cron": "^3.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.12.7",
+    "tailwind-merge": "^2.3.0",
+    "twilio": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.0",
+    "nodemon": "^3.1.9",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

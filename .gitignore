@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.env
+.env.local
+*.log
+.DS_Store
+twilio_2FA_*.txt
+*.pem
+*.key
+
+# clerk configuration (can include secrets)
+/.clerk/

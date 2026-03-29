@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ── Design Tokens ───────────────────────────────────────── */
+
+    /* Backgrounds */
+    --color-base:          #050d1a;
+    --color-surface:       rgba(255,255,255,0.03);
+    --color-surface-hover: rgba(255,255,255,0.05);
+    --color-border:        rgba(255,255,255,0.06);
+
+    /* Brand / Accent */
+    --color-accent:      #34d399;
+    --color-accent-dim:  rgba(52,211,153,0.10);
+    --color-accent-glow: rgba(52,211,153,0.20);
+    --color-cyan:        #06b6d4;
+
+    /* Text */
+    --color-text:       rgba(255,255,255,0.88);
+    --color-text-muted: rgba(255,255,255,0.45);
+    --color-text-dim:   rgba(255,255,255,0.20);
+
+    /* Semantic */
+    --color-success: #34d399;
+    --color-warning: #fbbf24;
+    --color-danger:  #f87171;
+    --color-info:    #60a5fa;
+
+    /* Fonts */
+    --font-display: 'Outfit', sans-serif;
+
+    /* Radius scale */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+
+    /* ── Shadcn/Tailwind Tokens (keep for compatibility) ──────── */
+    /* Dark theme — always on */
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --card: 224 71% 7%;
+    --card-foreground: 213 31% 91%;
+
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 222 47% 11%;
+    --secondary-foreground: 213 31% 91%;
+
+    --muted: 223 47% 11%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 160 84% 39%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 213 31% 91%;
+
+    --ring: 160 84% 39%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+@layer utilities {
+  /* Display font — Outfit Bold for headings, brand name, stat numbers */
+  .font-display {
+    font-family: var(--font-display);
+    font-feature-settings: "ss01" 1, "ss02" 1;
+  }
+
+  /* ── Entrance Animations ───────────────────────────────────── */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  /* Stagger delays for grid items */
+  .animate-fade-up-1 { animation-delay: 0ms; }
+  .animate-fade-up-2 { animation-delay: 55ms; }
+  .animate-fade-up-3 { animation-delay: 110ms; }
+  .animate-fade-up-4 { animation-delay: 165ms; }
+  .animate-fade-up-5 { animation-delay: 220ms; }
+  .animate-fade-up-6 { animation-delay: 275ms; }
+
+  /* Section fade-in with slight scale */
+  @keyframes fade-in {
+    from { opacity: 0; transform: scale(0.99); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes skeleton-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .animate-pulse {
+    animation: skeleton-pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Glow ring pulse for status indicators */
+  @keyframes glow-ping {
+    0% { transform: scale(1); opacity: 0.8; }
+    70%, 100% { transform: scale(2.2); opacity: 0; }
+  }
+  .animate-glow-ping {
+    animation: glow-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  /* Glass card surface */
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Gradient text utility */
+  .gradient-text {
+    background: linear-gradient(135deg, #34d399 0%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Per-color neon glow borders (Dubai LifeOS style) ────────── */
+  /* Resting state: visible colored border ring + bloom */
+  .glow-emerald {
+    border-color: rgba(52,211,153,0.35) !important;
+    box-shadow:
+      0 0 0 1px rgba(52,211,153,0.18),
+      0 0 18px rgba(52,211,153,0.18),
+      0 0 48px rgba(52,211,153,0.08),
+      inset 0 0 24px rgba(52,211,153,0.04);
+  }
+  .glow-blue {
+    border-color: rgba(96,165,250,0.35) !important;
+    box-shadow:
+      0 0 0 1px rgba(96,165,250,0.18),
+      0 0 18px rgba(96,165,250,0.18),
+      0 0 48px rgba(96,165,250,0.08),
+      inset 0 0 24px rgba(96,165,250,0.04);
+  }
+  .glow-violet {
+    border-color: rgba(167,139,250,0.35) !important;
+    box-shadow:
+      0 0 0 1px rgba(167,139,250,0.18),
+      0 0 18px rgba(167,139,250,0.18),
+      0 0 48px rgba(167,139,250,0.08),
+      inset 0 0 24px rgba(167,139,250,0.04);
+  }
+  .glow-orange {
+    border-color: rgba(251,146,60,0.38) !important;
+    box-shadow:
+      0 0 0 1px rgba(251,146,60,0.22),
+      0 0 18px rgba(251,146,60,0.22),
+      0 0 48px rgba(251,146,60,0.10),
+      inset 0 0 24px rgba(251,146,60,0.05);
+  }
+  .glow-pink {
+    border-color: rgba(244,114,182,0.35) !important;
+    box-shadow:
+      0 0 0 1px rgba(244,114,182,0.18),
+      0 0 18px rgba(244,114,182,0.18),
+      0 0 48px rgba(244,114,182,0.08),
+      inset 0 0 24px rgba(244,114,182,0.04);
+  }
+  .glow-slate {
+    border-color: rgba(148,163,184,0.25) !important;
+    box-shadow:
+      0 0 0 1px rgba(148,163,184,0.12),
+      0 0 18px rgba(148,163,184,0.10),
+      0 0 40px rgba(148,163,184,0.05);
+  }
+
+  /* Hover: intensified bloom */
+  .hover\:glow-emerald:hover {
+    border-color: rgba(52,211,153,0.55) !important;
+    box-shadow:
+      0 0 0 1px rgba(52,211,153,0.35),
+      0 0 28px rgba(52,211,153,0.30),
+      0 0 72px rgba(52,211,153,0.14),
+      inset 0 0 32px rgba(52,211,153,0.07);
+  }
+  .hover\:glow-blue:hover {
+    border-color: rgba(96,165,250,0.55) !important;
+    box-shadow:
+      0 0 0 1px rgba(96,165,250,0.35),
+      0 0 28px rgba(96,165,250,0.30),
+      0 0 72px rgba(96,165,250,0.14),
+      inset 0 0 32px rgba(96,165,250,0.07);
+  }
+  .hover\:glow-violet:hover {
+    border-color: rgba(167,139,250,0.55) !important;
+    box-shadow:
+      0 0 0 1px rgba(167,139,250,0.35),
+      0 0 28px rgba(167,139,250,0.30),
+      0 0 72px rgba(167,139,250,0.14),
+      inset 0 0 32px rgba(167,139,250,0.07);
+  }
+  .hover\:glow-orange:hover {
+    border-color: rgba(251,146,60,0.60) !important;
+    box-shadow:
+      0 0 0 1px rgba(251,146,60,0.40),
+      0 0 28px rgba(251,146,60,0.35),
+      0 0 72px rgba(251,146,60,0.16),
+      inset 0 0 32px rgba(251,146,60,0.08);
+  }
+  .hover\:glow-pink:hover {
+    border-color: rgba(244,114,182,0.55) !important;
+    box-shadow:
+      0 0 0 1px rgba(244,114,182,0.35),
+      0 0 28px rgba(244,114,182,0.30),
+      0 0 72px rgba(244,114,182,0.14),
+      inset 0 0 32px rgba(244,114,182,0.07);
+  }
+}
